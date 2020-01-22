@@ -7,43 +7,57 @@ import Amplify from 'aws-amplify'
 import config from '../aws-exports'
 Amplify.configure(config)
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+const temperatureOpts = [
+  { value: 'kelvin', label: 'Kelvin' },
+  { value: 'fahrenheit', label: 'Fahrenheit' },
+  { value: 'celsius', label: 'Vanilla' },
+    { value: 'rankine', label: 'Rankine' }
+
 ];
 
 const IndexPage = () => {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
-  const [selectedOption, setSelectedOption] = useState("")
+  const [selectedInputOption, setSelectedInputOption] = useState("")
+    const [selectedOutputOption, setSelectedOutputOption] = useState("")
+
   const handleInputChange = (e)=>{
     setInput(e.value)
-    setSelectedOption(e.label)
-    return console.log("input", input, e)
+    setSelectedInputOption(e.label)
+    return console.log("input", input, selectedInputOption)
   }
   const handleOutputChange = (e)=>{
     setOutput(e.value)
-    setSelectedOption(e.label)
-    return console.log("output", output, e)
+    setSelectedOutputOption(e.label)
+    return console.log("output", output, selectedOutputOption)
   }
   return (
     <Layout>
       <h1>Test</h1>
+      <div style={style.container}>
+      
       <Select
-        value={selectedOption}
+        value={selectedInputOption}
         onChange={handleInputChange}
-        options={options}
+        options={temperatureOpts}
       />
       <br/>
       <h1>To</h1>
       <Select
-        value={selectedOption}
+        value={selectedOutputOption}
         onChange={handleOutputChange}
-        options={options}
+        options={temperatureOpts}
       />
+      </div>
     </Layout>
   )
+}
+
+const style = {
+  container: {
+    margin: '1rem',
+    backgroundColor: 'gray'
+  }
 }
 
 export default IndexPage
