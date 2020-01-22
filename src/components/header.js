@@ -46,6 +46,7 @@ const styles = {
   headerTitle: {
     color: 'white',
     textDecoration: 'none',
+    textAlign: 'center'
   },
   link: {
     cursor: 'pointer',
