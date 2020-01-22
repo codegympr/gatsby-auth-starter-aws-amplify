@@ -8,11 +8,10 @@ import config from '../aws-exports'
 Amplify.configure(config)
 
 const temperatureOpts = [
-  { value: 'kelvin', label: 'Kelvin' },
+  { value: 'toKelvin', label: 'Kelvin' },
   { value: 'toFahrenheit', label: 'Fahrenheit' },
-  { value: 'toCelsius', label: 'Vanilla' },
-    { value: 'rankine', label: 'Rankine' }
-
+  { value: 'toCelsius', label: 'Celsius' },
+  { value: 'toRankine', label: 'Rankine' }
 ];
 
 const IndexPage = () => {
@@ -23,25 +22,22 @@ const IndexPage = () => {
   const [selectedInputOption, setSelectedInputOption] = useState("")
   const [selectedOutputOption, setSelectedOutputOption] = useState("")
   
-const toCelsius = fahrenheit => {
-  return (fahrenheit - 32) * 5 / 9;
-}
-
-const toFahrenheit = celsius => {
-  return (celsius * 9 / 5) + 32;
-}
-
-
+  const toCelsius = fahrenheit => {
+    return (fahrenheit - 32) * 5 / 9;
+  }
+  
+  const toFahrenheit = celsius => {
+    return (celsius * 9 / 5) + 32;
+  }
 
   const temperatureConverter = temp => {
-    
     const input = parseFloat(temp.value);
-  if (Number.isNaN(input)) {
-    return '';
-  }
-  const output = temp.convert(input);
-  const rounded = Math.round(output * 1000) / 1000;
-  return rounded.toString();
+      if (Number.isNaN(input)) {
+        return '';
+      }
+    const output = temp.convert(input);
+    const rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
   }
 
   const handleInputChange = (e)=>{
@@ -54,7 +50,7 @@ const toFahrenheit = celsius => {
     setSelectedOutputOption(e.label)
     const result = temperatureConverter({
       value: input,
-      converter: selectedOutputOption
+      converter: output
     })
     return console.log("output", output, result)
   }
