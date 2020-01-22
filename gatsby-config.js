@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Ventera Code challenge`,
+    title: `Ventera Code Challenge`,
     description: `Ventera`,
     author: `Alfredo Colon`,
   },
