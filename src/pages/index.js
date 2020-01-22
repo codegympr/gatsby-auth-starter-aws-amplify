@@ -52,11 +52,11 @@ const toFahrenheit = celsius => {
   const handleOutputChange = (e)=>{
     setOutput(e.value)
     setSelectedOutputOption(e.label)
-    temperatureConverter({
+    const result = temperatureConverter({
       value: input,
       converter: selectedOutputOption
     })
-    return console.log("output", output, selectedOutputOption)
+    return console.log("output", output, result)
   }
   return (
     <Layout>
