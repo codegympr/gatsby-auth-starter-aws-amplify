@@ -9,17 +9,40 @@ Amplify.configure(config)
 
 const temperatureOpts = [
   { value: 'kelvin', label: 'Kelvin' },
-  { value: 'fahrenheit', label: 'Fahrenheit' },
-  { value: 'celsius', label: 'Vanilla' },
+  { value: 'toFahrenheit', label: 'Fahrenheit' },
+  { value: 'toCelsius', label: 'Vanilla' },
     { value: 'rankine', label: 'Rankine' }
 
 ];
 
 const IndexPage = () => {
+  const [teacher, setTeacher] = useState(0)
+  const [student, setStudent] = useState(0)
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
   const [selectedInputOption, setSelectedInputOption] = useState("")
-    const [selectedOutputOption, setSelectedOutputOption] = useState("")
+  const [selectedOutputOption, setSelectedOutputOption] = useState("")
+  
+const toCelsius = fahrenheit => {
+  return (fahrenheit - 32) * 5 / 9;
+}
+
+const toFahrenheit = celsius => {
+  return (celsius * 9 / 5) + 32;
+}
+
+
+
+  const temperatureConverter = temp => {
+    
+    const input = parseFloat(temp.value);
+  if (Number.isNaN(input)) {
+    return '';
+  }
+  const output = temp.convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+  return rounded.toString();
+  }
 
   const handleInputChange = (e)=>{
     setInput(e.value)
@@ -29,6 +52,10 @@ const IndexPage = () => {
   const handleOutputChange = (e)=>{
     setOutput(e.value)
     setSelectedOutputOption(e.label)
+    temperatureConverter({
+      value: input,
+      converter: selectedOutputOption
+    })
     return console.log("output", output, selectedOutputOption)
   }
   return (
@@ -56,7 +83,8 @@ const IndexPage = () => {
 const style = {
   container: {
     margin: '1rem',
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
+    textAlign: 'center'
   }
 }
 
